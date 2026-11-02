@@ -1,0 +1,256 @@
+/* ================================================================
+   Editor
+   ================================================================ */
+#editor { height: 100%; overflow: hidden; }
+#editor .cm-editor { height: 100%; background: transparent; font-size: var(--font-size); }
+#editor .cm-editor.cm-focused { outline: none; }
+#editor .cm-scroller { font-family: var(--prose); line-height: 1.7; letter-spacing: -0.003em; overflow-y: auto; }
+#editor .cm-content {
+  max-width: calc(var(--column) + 2 * var(--gutter));
+  margin: 0 auto;
+  padding: var(--head-room) var(--gutter) 40vh;
+  caret-color: var(--caret);
+  user-select: text;
+  -webkit-user-select: text;
+  cursor: text;
+}
+#editor .cm-line { padding: 0; }
+#editor .cm-placeholder { color: var(--muted); font-style: normal; }
+#editor .cm-cursor { border-left: 2px solid var(--caret) !important; }
+#editor .cm-selectionBackground, #editor .cm-focused .cm-selectionBackground { background: var(--selection) !important; }
+/* CodeMirror paints the selection layer above; a tinted native ::selection on top would double the
+   tint (0.33 → ~0.55) and break the contrast numbers in chrome.css. (No text-bearing widget inside
+   .cm-content takes focus — the only focusable one is the task checkbox — so no re-tint rule is needed.) */
+#editor .cm-content ::selection { background: transparent !important; }
+#editor .cm-selectionMatch { background: var(--hover); }
+#editor .cm-typewriter .cm-content { padding-top: 45vh; padding-bottom: 50vh; }
+
+/* Headings: more space above than below, so they bind to what follows. */
+#editor .cm-h1 { font-size: 1.875em; line-height: 1.25; padding: 0.7em 0 0.15em !important; }
+#editor .cm-h2 { font-size: 1.4375em; line-height: 1.3; padding: 0.6em 0 0.1em !important; }
+#editor .cm-h3 { font-size: 1.1875em; line-height: 1.4; padding: 0.45em 0 0.05em !important; }
+#editor .cm-h4, #editor .cm-h5, #editor .cm-h6 { font-size: 1em; padding-top: 0.3em !important; }
+#editor .cm-line.cm-heading-gap { line-height: 0.75; }
+#editor .cm-content > .cm-h1:first-child, #editor .cm-content > .cm-h2:first-child { padding-top: 0 !important; }
+
+/* inline */
+#editor .cm-inline-code {
+  font-family: var(--mono);
+  font-size: 0.86em;
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  padding: 0.1em 0.3em;
+}
+#editor .cm-link {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--link) 35%, transparent);
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color var(--dur) var(--ease);
+}
+#editor .cm-link:hover { text-decoration-color: currentColor; }
+#editor .cm-link * { color: inherit !important; }
+#editor .cm-sub, #editor .cm-sup { font-size: 0.75em; line-height: 0; position: relative; }
+#editor .cm-sub { vertical-align: sub; }
+#editor .cm-sup { vertical-align: super; }
+#editor .cm-emoji { font-family: "Apple Color Emoji", var(--text); }
+#editor .cm-footnote-ref { font-size: 0.75em; vertical-align: super; line-height: 0; color: var(--link); font-variant-numeric: tabular-nums; }
+#editor span.cm-footnote-ref::before { content: "["; } #editor span.cm-footnote-ref::after { content: "]"; }
+#editor .cm-footnote-def { font-size: 0.9em; color: var(--muted); }
+#editor .cm-footnote-label { color: var(--accent); }
+#editor .cm-heading-id { color: var(--syntax); font-size: 0.6em; font-weight: 400; font-family: var(--mono); }
+#editor .cm-dt { font-weight: 650; }
+#editor .cm-dd { padding-left: var(--space-6) !important; }
+#editor .cm-task-done { color: var(--muted); text-decoration: line-through; }
+
+/* blocks */
+#editor .cm-quote { border-left: 3px solid var(--rule); padding-left: var(--space-4) !important; color: var(--muted); }
+#editor .cm-codeblock {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  line-height: 1.6;
+  background: var(--surface);
+  padding: 0 var(--space-4) !important;
+}
+#editor .cm-codeblock-first { border-radius: var(--radius-lg) var(--radius-lg) 0 0; padding-top: var(--space-2) !important; }
+#editor .cm-codeblock-last { border-radius: 0 0 var(--radius-lg) var(--radius-lg); padding-bottom: var(--space-2) !important; }
+#editor .cm-codeblock-first.cm-codeblock-last { border-radius: var(--radius-lg); }
+#editor .cm-fence { color: var(--syntax); font-size: 0.85em; }
+
+/* tables: rendered and edited in place; a selection inside one shows its source */
+#editor .cm-table { position: relative; margin: var(--space-2) 0; }
+#editor .cm-table-scroll { overflow-x: auto; }
+#editor .cm-table table { border-collapse: collapse; width: 100%; font-size: 0.92em; line-height: 1.5; }
+#editor .cm-table th, #editor .cm-table td {
+  border-bottom: 1px solid var(--rule);
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  height: calc(1.5em + 2 * var(--space-2)); /* empty rows keep their height */
+  min-width: 3em;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  cursor: text;
+  outline: none;
+}
+#editor .cm-table th { font-weight: 650; border-bottom-width: 1.5px; border-bottom-color: var(--syntax); }
+#editor .cm-table tr:hover td { background: var(--hover); }
+#editor .cm-table th:focus, #editor .cm-table td:focus { background: var(--hover); box-shadow: inset 0 0 0 1.5px var(--accent); border-radius: 2px; }
+#editor .cm-table code { font-family: var(--mono); font-size: 0.88em; background: var(--surface); border-radius: var(--radius-sm); padding: 0.1em 0.3em; }
+#editor .cm-table mark { background: var(--mark); color: inherit; border-radius: 3px; box-shadow: inset 0 -1.5px 0 var(--mark-edge); }
+#editor .cm-table .cm-link { text-decoration: none; }
+
+/* table toolbar: floats above the table while a cell is being edited */
+#editor .cm-table-tools {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + var(--space-1));
+  z-index: 5;
+  display: none;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-1);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  box-shadow: var(--shadow-md);
+  font-family: var(--ui, system-ui, sans-serif);
+}
+#editor .cm-table:focus-within .cm-table-tools { display: flex; animation: rise var(--dur) var(--ease); }
+#editor .cm-table-tools .btn { color: color-mix(in srgb, var(--fg) 70%, transparent); }
+#editor .cm-table-tools .btn:hover { color: var(--fg); background: var(--active); }
+#editor .cm-table-tools .btn:disabled { opacity: 0.35; pointer-events: none; }
+#editor .cm-table-tools .btn[data-act="trash"]:hover { color: var(--danger, #b3261e); }
+#editor .cm-table-tools .sep { width: 1px; height: 1rem; margin: 0 2px; background: var(--rule); }
+#editor .cm-table-tools svg { width: 1rem; height: 1rem; }
+
+/* "+" strips on the bottom / right edge: add a row / column at the end */
+#editor .cm-table-add {
+  all: unset;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: var(--radius-sm);
+  color: var(--muted);
+  background: var(--hover);
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity var(--dur-fast) var(--ease);
+}
+#editor .cm-table-add svg { width: 0.85rem; height: 0.85rem; }
+#editor .cm-table-add-row { left: 0; right: 0; top: calc(100% + 2px); height: 0.9rem; }
+#editor .cm-table-add-col { top: 0; bottom: 0; left: calc(100% + 2px); width: 0.9rem; }
+#editor .cm-table:hover .cm-table-add { opacity: 1; }
+#editor .cm-table-add:hover { color: var(--fg); background: var(--active); }
+
+/* widgets */
+#editor .cm-bullet { color: var(--muted); display: inline-block; width: 0.9em; }
+#editor .cm-task-box {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0 0.45em 0 0;
+  vertical-align: -0.08em;
+  border: 1.5px solid var(--muted);
+  border-radius: var(--radius-sm);
+  position: relative;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+#editor .cm-task-box:hover { border-color: var(--accent); }
+#editor .cm-task-box:checked { background: var(--accent); border-color: var(--accent); }
+#editor .cm-task-box:checked::after {
+  content: "";
+  position: absolute;
+  left: 28%;
+  top: 8%;
+  width: 28%;
+  height: 52%;
+  border: solid var(--bg);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+#editor .cm-rule { display: inline-block; width: 100%; height: 1px; background: var(--rule); vertical-align: middle; }
+#editor .cm-image { display: inline-block; max-width: 100%; }
+#editor .cm-image img { max-width: 100%; max-height: 70vh; border-radius: var(--radius-md); display: block; margin: var(--space-2) 0; }
+#editor .cm-image.broken { color: var(--muted); font-style: italic; }
+
+/* focus mode */
+#editor .cm-dim, #editor .cm-line.cm-dim { opacity: var(--dim); }
+#editor .cm-focus .cm-line, #editor .cm-focus .cm-dim { transition: opacity var(--dur-slow) var(--ease); }
+
+/* search panel — same field/button states as the rest of the UI */
+#editor .cm-panels { background: var(--bg) !important; color: var(--fg); border: none !important; }
+#editor .cm-panels-top { border-bottom: 1px solid var(--rule) !important; }
+#editor .cm-search { font: var(--ui-sm) var(--ui); padding: var(--space-2) var(--space-4) !important; display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); }
+#editor .cm-search br { display: none; }
+#editor .cm-search input.cm-textfield {
+  font: inherit;
+  color: var(--fg);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-2);
+  margin: 0;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+#editor .cm-search input.cm-textfield:hover { border-color: var(--syntax); }
+#editor .cm-search input.cm-textfield:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); outline: none; }
+#editor .cm-search button {
+  font: inherit;
+  color: var(--fg);
+  background: var(--surface) !important;
+  background-image: none !important;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-1) var(--space-3);
+  margin: 0;
+  transition: background-color var(--dur) var(--ease);
+}
+#editor .cm-search button:hover { background: var(--hover) !important; }
+#editor .cm-search button:active { background: var(--pressed) !important; transform: translateY(1px); }
+#editor .cm-search button[name="close"] { border: none; background: none !important; color: var(--muted); font-size: 1.1rem; padding: 0 var(--space-2); }
+#editor .cm-search label { font-size: var(--ui-xs); color: var(--muted); display: inline-flex; align-items: center; gap: var(--space-1); }
+#editor .cm-search input[type="checkbox"] { accent-color: var(--accent); margin: 0; }
+#editor .cm-searchMatch { background: rgba(255, 196, 0, 0.3); border-radius: 2px; }
+#editor .cm-searchMatch-selected { background: rgba(255, 150, 0, 0.55); }
+
+/* ================================================================
+   Print (PDF export)
+   ================================================================ */
+#print-view { display: none; }
+@media print {
+  /* Only the rendered document prints: hide titlebar, app, status bar, bubble, dialogs. */
+  body > :not(#print-view) { display: none !important; }
+  html, body { display: block; height: auto; overflow: visible; background: #fff; color: #000; }
+  #print-view { display: block; font: 11pt/1.6 var(--serif); color: #000; }
+  #print-view h1 { font-size: 22pt; margin: 0 0 8pt; } #print-view h2 { font-size: 16pt; margin: 18pt 0 6pt; } #print-view h3 { font-size: 13pt; margin: 14pt 0 4pt; }
+  #print-view pre, #print-view code { font-family: var(--mono); font-size: 9pt; background: #f3f3f1; border-radius: 4px; }
+  #print-view pre { padding: 10px 12px; white-space: pre-wrap; }
+  #print-view pre code { background: none; }
+  #print-view blockquote { margin-left: 0; padding-left: 12px; border-left: 3px solid #ddd; color: #444; }
+  #print-view img { max-width: 100%; }
+  #print-view table { border-collapse: collapse; } #print-view th, #print-view td { border: 1px solid #ccc; padding: 4px 8px; }
+  #print-view a { color: #000; }
+  #print-view li:has(> input[type=checkbox]) { list-style: none; }
+  #print-view mark { background: #fff1a8; color: #000; border-bottom: 1px solid #857600; } /* 4.01:1 on the mark, 4.58:1 on paper */
+  #print-view sub, #print-view sup { font-size: 0.75em; line-height: 0; }
+  #print-view dt { font-weight: 650; } #print-view dd { margin: 0 0 6pt 18pt; } #print-view dd > p { margin: 0; }
+  #print-view .footnotes { margin-top: 24pt; padding-top: 8pt; border-top: 1px solid #ddd; font-size: 9pt; color: #444; }
+  @page { margin: 2cm; }
+}
+
+/* emoji completion — same surface as the selection bubble */
+#editor .cm-tooltip.cm-tooltip-autocomplete {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  background: var(--raised);
+  box-shadow: 0 10px 15px -3px rgba(27, 27, 26, 0.1), 0 4px 6px -4px rgba(27, 27, 26, 0.1);
+  padding: var(--space-1);
+  overflow: hidden;
+}
+#editor .cm-tooltip-autocomplete > ul { font: var(--ui-sm) var(--ui); max-height: 15rem; }
+#editor .cm-tooltip-autocomplete > ul > li { padding: var(--space-1) var(--space-2) !important; border-radius: var(--radius-md); color: var(--fg); }
+#editor .cm-tooltip-autocomplete > ul > li[aria-selected] { background: var(--active); color: var(--fg); }
+#editor .cm-completionMatchedText { text-decoration: none; font-weight: 600; }

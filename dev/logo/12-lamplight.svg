@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2a28"/><stop offset="1" stop-color="#151514"/></linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity=".22"/></filter>
+    <clipPath id="tile"><rect x="100" y="100" width="824" height="824" rx="186"/></clipPath>
+    <pattern id="lines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#efece6"/></pattern>
+    <pattern id="dimlines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#3a3936"/></pattern>
+    <pattern id="amberlines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#d9a94e"/></pattern>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#bg)" filter="url(#sh)"/>
+  <rect x="100.5" y="100.5" width="823" height="823" rx="185.5" fill="none" stroke="rgba(232,230,225,.10)"/>
+  <defs>
+    <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d9a94e" stop-opacity=".42"/><stop offset="1" stop-color="#d9a94e" stop-opacity=".04"/></linearGradient>
+    <clipPath id="cone"><path d="M452 300H572L748 760H276z"/></clipPath>
+  </defs>
+  <path d="M452 300H572L748 760H276z" fill="url(#beam)"/>
+  <g fill="#3a3936"><rect x="236" y="470" width="552" height="34" rx="17"/><rect x="236" y="560" width="520" height="34" rx="17"/><rect x="236" y="650" width="552" height="34" rx="17"/></g>
+  <g fill="#efece6" clip-path="url(#cone)"><rect x="236" y="470" width="552" height="34" rx="17"/><rect x="236" y="560" width="520" height="34" rx="17"/><rect x="236" y="650" width="552" height="34" rx="17"/></g>
+  <path d="M432 300a80 80 0 0 1 160 0z" fill="#d9a94e"/>
+  <rect x="500" y="196" width="24" height="64" rx="12" fill="#d9a94e"/>
+</svg>

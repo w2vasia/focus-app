@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a2a28"/><stop offset="1" stop-color="#151514"/></linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="#000" flood-opacity=".22"/></filter>
+    <clipPath id="tile"><rect x="100" y="100" width="824" height="824" rx="186"/></clipPath>
+    <pattern id="lines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#efece6"/></pattern>
+    <pattern id="dimlines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#3a3936"/></pattern>
+    <pattern id="amberlines" width="40" height="56" patternUnits="userSpaceOnUse"><rect width="40" height="30" fill="#d9a94e"/></pattern>
+  </defs>
+  <rect x="100" y="100" width="824" height="824" rx="186" fill="url(#bg)" filter="url(#sh)"/>
+  <rect x="100.5" y="100.5" width="823" height="823" rx="185.5" fill="none" stroke="rgba(232,230,225,.10)"/>
+  <defs><filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22" result="b"/><feComponentTransfer in="b" result="soft"><feFuncA type="linear" slope=".55"/></feComponentTransfer><feMerge><feMergeNode in="soft"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+  <rect x="284" y="306" width="456" height="456" rx="104" fill="#0e0e0d"/>
+  <rect x="284" y="284" width="456" height="456" rx="104" fill="#323230"/>
+  <rect x="284.5" y="284.5" width="455" height="455" rx="103.5" fill="none" stroke="rgba(232,230,225,.10)"/>
+  <g transform="translate(512 512) scale(.5) translate(-512 -512)" fill="#e8b85a" filter="url(#glow)"><path d="M512 284H462a126 126 0 0 0 0 252h50z"/><rect x="490" y="284" width="44" height="456" rx="22"/><rect x="490" y="284" width="172" height="44" rx="22"/><rect x="640" y="284" width="44" height="456" rx="22"/></g>
+</svg>

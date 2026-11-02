@@ -1,0 +1,18 @@
+<!doctype html><meta charset="utf-8"><title>Focus — icon concepts</title>
+<style>
+ body{margin:0;font:13px -apple-system,sans-serif;color:#1b1b1a}
+ .grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;padding:24px}
+ .light{background:#f4f1ec}.dark{background:#1b1b1a;color:#e8e6e1}
+ .card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px}
+ .small{display:flex;gap:12px;align-items:center}
+ b{font-weight:600}
+</style>
+<body></body>
+<script>
+ const concepts=[["03-night-writing","03 Night writing ♥"],["02-morning-pages","02 Morning pages ♥"],["08-selection","08 Selection ♥"],["07-keycap","07 Keycap ♥"],["11-golden-hour","11 Golden hour"],["12-lamplight","12 Lamplight"],["13-backlit-key","13 Backlit key"],["14-caret-candle","14 Caret candle"],["15-phases","15 Phases"],["16-highlighter","16 Highlighter"],["17-sunrise-key","17 Sunrise key"],["18-full-moon","18 Full moon"],["19-eclipse","19 Eclipse"],["20-night-selection","20 Night selection"]];
+ for (const theme of ["light","dark"]) {
+   const g=document.createElement("div"); g.className="grid "+theme;
+   g.innerHTML=concepts.map(([f,n])=>`<div class="card"><img src="./${f}.svg" width="200"><div class="small">${[64,32,16].map(s=>`<img src="./${f}.svg" width="${s}">`).join("")}</div><b>${n}</b></div>`).join("");
+   document.body.appendChild(g);
+ }
+</script>

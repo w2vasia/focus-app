@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus</title>
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <header id="titlebar" data-tauri-drag-region>
+      <span id="doc-title" data-tauri-drag-region></span>
+      <div id="view-controls" role="toolbar" aria-label="View">
+        <button class="btn" data-action="toggle_sidebar" data-icon="sidebar" title="Toggle Sidebar ⌘\" aria-label="Toggle sidebar" aria-pressed="false"></button>
+        <button class="btn" data-action="cycle_font" data-icon="type" title="Switch Font" aria-label="Switch font"></button>
+        <button class="btn" data-action="toggle_focus" data-icon="focus" title="Focus Mode ⇧⌘F" aria-label="Focus mode" aria-pressed="false"></button>
+        <span class="sep" role="separator" aria-orientation="vertical"></span>
+        <div class="segmented" role="radiogroup" aria-label="View mode">
+          <button class="btn" role="radio" data-mode="edit" data-icon="pencil" title="Edit ⌥⌘1" aria-label="Edit view"></button>
+          <button class="btn" role="radio" data-mode="split" data-icon="split" title="Split ⌥⌘2" aria-label="Split view"></button>
+          <button class="btn" role="radio" data-mode="read" data-icon="book" title="Read ⌥⌘3" aria-label="Read view"></button>
+        </div>
+        <span class="sep" role="separator" aria-orientation="vertical"></span>
+        <button class="btn" data-action="export_pdf" data-icon="file-pdf" title="Export as PDF ⌘P" aria-label="Export as PDF"></button>
+        <span class="sep" role="separator" aria-orientation="vertical"></span>
+        <button class="btn" data-action="toggle_theme" data-icon="moon" title="Toggle Theme" aria-label="Toggle theme"></button>
+        <button class="btn" data-action="help" data-icon="help" title="Help ⇧⌘/" aria-label="Help" aria-haspopup="dialog"></button>
+      </div>
+    </header>
+    <div id="app">
+      <aside id="sidebar"></aside>
+      <main id="main" aria-label="Editor">
+        <div id="toolbar" role="toolbar" aria-label="Formatting"></div>
+        <div id="editor"></div>
+        <article id="preview" class="prose" aria-label="Preview" tabindex="-1" hidden></article>
+      </main>
+    </div>
+    <footer id="statusbar" aria-label="Document status">
+      <div class="left"><span id="st-file"></span><span class="dot">·</span><span id="st-lines"></span></div>
+      <div class="center" aria-live="polite"><button id="st-mode" title="Switch view ⇧⌘P"></button><span class="dot">·</span><button id="st-font" title="Switch font"></button><span class="dot">·</span><button id="st-theme" title="Toggle theme"></button></div>
+      <div class="right"><span id="st-words"></span><span class="dot">·</span><span id="st-chars"></span><span class="dot">·</span><span id="st-read" class="read"></span></div>
+    </footer>
+    <article id="print-view"></article>
+  </body>
+</html>
