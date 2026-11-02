@@ -2,6 +2,8 @@
 
 A minimal, distraction-free Markdown editor for macOS (11 Big Sur or later), built with Tauri 2 (Rust) and CodeMirror 6.
 
+![Focus in dark mode](docs/screenshot-dark.png)
+
 ## Features
 
 - **Live preview editing.** Markdown renders as you type; the syntax of the line you are editing stays visible.
