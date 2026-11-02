@@ -4,6 +4,14 @@ A minimal, distraction-free Markdown editor for macOS (11 Big Sur or later), bui
 
 ![Focus in dark mode](docs/screenshot-dark.png)
 
+## Download
+
+macOS 11 or later. Unsigned builds — on first launch, right-click the app → **Open**.
+
+- [Apple Silicon (DMG)](https://github.com/w2vasia/focus-app/releases/download/v0.1.0/Focus_0.1.0_aarch64.dmg)
+- [Intel (DMG)](https://github.com/w2vasia/focus-app/releases/download/v0.1.0/Focus_0.1.0_x64.dmg)
+- [All releases](https://github.com/w2vasia/focus-app/releases)
+
 ## Features
 
 - **Live preview editing.** Markdown renders as you type; the syntax of the line you are editing stays visible.
